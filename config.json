@@ -7,7 +7,7 @@
   "autoCreateDB": false,
   "allowInbox": false,
   "autoClean": true,
-  "adminOnly": true,
+  "adminOnly": false,
   "encryptSt": false,
   "removeSt": false,
   "UPDATE": {
