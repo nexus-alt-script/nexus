@@ -16,7 +16,7 @@ module.exports.run = function({api, event, args}) {
     if (!id) return api.sendMessage('No ID provided.', event.threadID, event.messageID);
     Vdata.verified.push(id)
     fs.writeFileSync(__dirname + "/data/verified.json", JSON.stringify(Vdata, null, 2))
-    api.sendMessage("Approved Successfully!", event.messageID)
+    api.sendMessage("Approved Successfully!", event.threadID, event.messageID)
   } else if (menu == 'ban') {
     const id = args[1]
     if (!id) return api.sendMessage('No ID provided.', event.threadID, event.messageID);
@@ -30,7 +30,7 @@ module.exports.run = function({api, event, args}) {
     if (!id in Bdata.banned) return api.sendMessage('ID is not banned on the database.', event.messageID, event.threadID)
     Bdata.banned.splice(Bdata.banned.indexOf(id), 1)
     fs.writeFileSync(__dirname + "/data/banned.json", JSON.stringify(Bdata, null, 2))
-    api.sendMessage(id + " has been successfully unbanned.")
+    api.sendMessage(id + " has been successfully unbanned.", event.messageID, event.threadID)
   }
   
 }
