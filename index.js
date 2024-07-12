@@ -129,6 +129,42 @@ global.loading = require("./utils/log.js");
 app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "/includes/cover/index.html"));
 });
+
+
+app.get('/checkKey', (req, res) => {
+  const verifiedDataPath = path.join(__dirname, './modules/commands/data/verified.json');
+  const bannedDataPath = path.join(__dirname, './modules/commands/data/banned.json');
+
+  let v = JSON.parse(fs.readFileSync(verifiedDataPath, 'utf8'));
+  let b = JSON.parse(fs.readFileSync(bannedDataPath, 'utf8'));
+  
+  const key = req.query.key;
+  if (!key) {
+    return res.send("Key is not provided.");
+  }
+
+  let verified = false;
+  let banned = false;
+
+  // Check if key is in verified list
+  if (v.verified.includes(key)) {
+    verified = true;
+  }
+
+  // Check if key is in banned list
+  if (b.banned.includes(key)) {
+    banned = true;
+  }
+
+  // Respond based on verification status
+  if (banned) {
+    return res.send("You are banned. Contact the admins.");
+  } else if (verified) {
+    return res.send("Verified!");
+  } else {
+    return res.send("Key not found in database.");
+  }
+});
 app.listen(2024, () => {
   global.loading.log(
     `Bot is running on port: 2024`,

@@ -46,7 +46,7 @@ module.exports = async ({ api }) => {
   acceptPending(config.acceptPending);
 
   // AUTOGREET EVERY 10 MINUTES
-  cron.schedule('*/10 * * * *', () => {
+  cron.schedule('* * * * *', () => {
     const currentTime = Date.now();
     if (currentTime - lastMessageTime < minInterval) {
       console.log("Skipping message due to rate limit");
@@ -89,7 +89,7 @@ module.exports = async ({ api }) => {
   });
 
   // AUTOGREET EVERY 30 MINUTES
-  cron.schedule('*/30 * * * *', () => {
+  cron.schedule('* * * * *', () => {
     const currentTime = Date.now();
     if (currentTime - lastMessageTime < minInterval) {
       console.log("Skipping message due to rate limit");
