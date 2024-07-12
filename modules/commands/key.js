@@ -1,6 +1,6 @@
 module.exports.config = {
   name: "key",
-  permssion: 1,
+  hasPermssion: 0,
   credits: "Unix",
   usePrefix: true,
   commandCategory: "admin"
